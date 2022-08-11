@@ -168,6 +168,39 @@ namespace Module25_Task
             }
         }
 
+        public void GetTheMostNewBook()
+        {
+            using (var db = new AppContext())
+            {
+                var date = db.Books.Max(a => a.Release_Year);
+                var book = db.Books.FirstOrDefault(a => a.Release_Year == date);
+                Console.WriteLine(book.Name);
+            }
+        }
+
+        public void GetAllBooksOrederedByName()
+        {
+            using (var db = new AppContext())
+            {
+                var books = db.Books.ToList().OrderBy(a => a.Name);
+                foreach (var book in books)
+                {
+                    Console.WriteLine(book.Name);
+                }
+            }
+        }
+
+        public void GetAllBooksOrederedByDescendingByDate()
+        {
+            using (var db = new AppContext())
+            {
+                var books = db.Books.ToList().OrderByDescending(a => a.Release_Year);
+                foreach (var book in books)
+                {
+                    Console.WriteLine(book.Name);
+                }
+            }
+        }
 
     }
 }
